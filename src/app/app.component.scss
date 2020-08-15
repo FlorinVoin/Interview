@@ -1,0 +1,28 @@
+.mainContainer {
+  height: 100vh;
+  background: #f3f3f3;
+  .header {
+    height: 8vh;
+    background-color: white;
+    .links-container {
+      margin-right: 5%;
+      a {
+        color: black;
+        font-size: 16px;
+        font-weight: 500;
+        padding-bottom: 1%;
+        border-bottom: 2px solid white;
+        text-align: center;
+        text-decoration: none;
+      }
+      .is-active {
+        color: #6866ff;
+        border-bottom: 2px solid #6866ff;
+      }
+      a:hover {
+        color: #6866ff;
+        border-bottom: 2px solid #6866ff;
+      }
+    }
+  }
+}

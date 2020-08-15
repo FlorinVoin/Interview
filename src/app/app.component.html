@@ -1,0 +1,14 @@
+<div class="mainContainer" fxLayout="column">
+  <div class="header" fxLayout="row" fxLayoutAlign="end end">
+    <div class="links-container" fxLayoutGap="3%" fxLayout="row" fxFlex fxLayoutAlign="end end">
+      <a [routerLink]="['/home']" routerLinkActive="is-active" fxFlex.gt-lg="8" fxFlex.md="12" fxFlex.sm="16"
+         fxFlex.xs="20">Home</a>
+      <a [routerLink]="['/payment']" routerLinkActive="is-active" fxFlex="8">Payment</a>
+    </div>
+  </div>
+  <router-outlet></router-outlet>
+</div>
+
+
+
+

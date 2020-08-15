@@ -1,0 +1,88 @@
+<div class="mainContainer" fxLayout="row" fxLayoutAlign="center center">
+  <div class="formContainer" fxFlex.gt-lg="45" fxFlex.md="55" fxFlex.sm="65" fxFlex.xs="75">
+    <div class="photo" fxFlex="50" fxLayoutAlign="center center">
+      <img src="assets/cards.png">
+    </div>
+    <form name="paymentForm" fxLayout="column" fxFlex="50" fxLayoutAlign="center center" [formGroup]="paymentForm"
+          novalidate>
+      <mat-form-field>
+        <mat-label>Credit Card Number</mat-label>
+        <input matInput type="text" maxlength="12" formControlName="creditCardNumber">
+        <mat-error
+          *ngIf="paymentForm.get('creditCardNumber').errors && paymentForm.get('creditCardNumber').errors.required">
+          Credit Card Number is required.
+        </mat-error>
+        <mat-error
+          *ngIf="paymentForm.get('creditCardNumber').errors && paymentForm.get('creditCardNumber').errors.pattern">
+          Only numbers are allowed.
+        </mat-error>
+        <mat-error
+          *ngIf="paymentForm.get('creditCardNumber').errors && !paymentForm.get('creditCardNumber').errors.pattern && paymentForm.get('creditCardNumber').errors.minlength">
+          Credit Card Number code needs to be 12 digits long.
+        </mat-error>
+      </mat-form-field>
+      <mat-form-field>
+        <mat-label>Card Holder</mat-label>
+        <input matInput type="text" formControlName="cardHolder">
+        <mat-error
+          *ngIf="paymentForm.get('cardHolder').errors && paymentForm.get('cardHolder').errors.required">
+          Card Holder is required.
+        </mat-error>
+      </mat-form-field>
+      <mat-form-field>
+        <mat-label>Security Code</mat-label>
+        <input matInput type="text" maxlength="3" formControlName="securityCode">
+        <mat-error
+          *ngIf="paymentForm.get('securityCode').errors && paymentForm.get('securityCode').errors.pattern">
+          Only numbers are allowed.
+        </mat-error>
+        <mat-error
+          *ngIf="paymentForm.get('securityCode').errors && !paymentForm.get('securityCode').errors.pattern && paymentForm.get('securityCode').errors.minlength">
+          Security Code needs to be 3 digits long.
+        </mat-error>
+      </mat-form-field>
+      <mat-form-field>
+        <mat-label>Amount</mat-label>
+        <input matInput type="text" formControlName="amount">
+        <mat-error
+          *ngIf="paymentForm.get('amount').errors && paymentForm.get('amount').errors.required">
+          Amount is required.
+        </mat-error>
+        <mat-error
+          *ngIf="paymentForm.get('amount').errors && paymentForm.get('amount').errors.min">
+          Minimum amount is 1.
+        </mat-error>
+        <mat-error
+          *ngIf="paymentForm.get('amount').errors && paymentForm.get('amount').errors.pattern">
+          Only numbers are allowed.
+        </mat-error>
+      </mat-form-field>
+      <div class="date" fxLayout="row" fxFlex="12" fxLayoutAlign="center start" fxLayoutGap="10%">
+        <mat-form-field fxFlex="45">
+          <mat-label>Expiration Month</mat-label>
+          <mat-select [(ngModel)]="selectedMonth" ngDefaultControl [ngModelOptions]="{standalone: true}">
+            <mat-option *ngFor="let month of months" [value]="month">
+              {{month}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+        <mat-form-field fxFlex="45">
+          <mat-label>Expiration Year</mat-label>
+          <mat-select [(ngModel)]="selectedYear" ngDefaultControl [ngModelOptions]="{standalone: true}">
+            <mat-option *ngFor="let year of years" [value]="year">
+              {{year}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+      <mat-error class="dateErrors" *ngIf="dateErrorMsg!= 'undefined'">
+        {{dateErrorMsg}}
+      </mat-error>
+      <button mat-raised-button aria-label="Submit"
+              [disabled]="isLoading"
+              fxLayoutAlign="center center" fxFlex="8" (click)="pay(paymentForm)">
+        <span [hidden]="isLoading">Pay Now</span>
+      </button>
+    </form>
+  </div>
+</div>
